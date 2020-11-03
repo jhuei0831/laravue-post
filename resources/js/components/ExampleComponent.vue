@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <div v-for="post in posts" :key="post">
+        <div v-for="post in posts" :key="post.id">
             <h1>{{ post.title }}</h1>
             <p>{{ post.body }}</p>
             <button class="btn btn-xs btn-primary" @click="modify(post)">修改</button>
@@ -13,7 +13,7 @@
                 <label class="control-label">標題
                     <span v-if="titleWarning">不能空白</span>
                 </label>
-                <input class="form-control" v-model="post.title">
+                <input class="form-control" :class="{ 'is-invalid': bodyWarning }" v-model="post.title">
             </div>
             <div class="form-group" :class="{ 'has-warning': bodyWarning }">
                 <label class="control-label">內容
@@ -26,7 +26,7 @@
                     <button @click.prevent="save">儲存</button>
                     <button @click.prevent="cancel">取消</button>
                 </div>
-                <button v-else @click.prevent="publish">發佈</button>
+                <button class="btn btn-success" v-else @click.prevent="publish">發佈</button>
             </div>
         </form>
     </div>
@@ -81,7 +81,7 @@ export default {
         },
 
         modify: function (post) {
-            location.href = "#form";
+            // location.href = "#form";
             this.post.id = post.id;
             this.post.title = post.title;
             this.post.body = post.body;

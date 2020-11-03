@@ -22,3 +22,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/posts', 'PostController@index');
+
+Route::post('/vuelogin', 'Auth\LoginController@vuelogin');
+
+Route::get('/vue', function () {
+    return view('login');
+
+});
